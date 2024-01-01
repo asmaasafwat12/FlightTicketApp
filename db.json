@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "email": "asmaasafwat12@yahoo.com",
+      "password": "$2a$10$3BXyPqmvcWGgLKG71LjLjeyWBmldA.KKezAN0N7IfpuwHtT6eKUqy",
+      "id": 4
+    },
+    {
+      "email": "asmaapat5@yopmail.com",
+      "password": "$2a$10$PbkbPp7.ohG.mHasY6ueR.WRp90yE6ZjIoIGsbgYI1p2KYZ/g5dAS",
+      "confirmPassword": "1234",
+      "id": 5
+    }
+  ],
+  "flightTickets": [
+    {
+      "id": 2,
+      "capacity": 200,
+      "date": "2024-01-03",
+      "flightCode": "XYZ456"
+    },
+    {
+      "id": 3,
+      "capacity": 18,
+      "date": "2024-01-05",
+      "flightCode": "DEF789"
+    },
+    {
+      "capacity": 22,
+      "date": "2024-01-05",
+      "flightCode": "d3rsds",
+      "id": 4
+    }
+  ]
+}
