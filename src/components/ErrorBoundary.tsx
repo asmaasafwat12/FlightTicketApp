@@ -1,35 +1,41 @@
-import { Typography } from "@mui/material";
-import React, { Component, ErrorInfo, ReactNode } from "react";
+import { Box, Button, Typography } from "@mui/material";
+import React, { useMemo } from "react";
+import {
+  isRouteErrorResponse,
+  useNavigate,
+  useRouteError,
+} from "react-router-dom";
 
-interface Props {
-  children?: ReactNode;
-}
+const ErrorBoundary = () => {
+  const error = useRouteError();
+  const navigate = useNavigate();
 
-interface State {
-  hasError: boolean;
-}
-
-class ErrorBoundary extends Component<Props, State> {
-  public state: State = {
-    hasError: false,
-  };
-
-  public static getDerivedStateFromError(_: Error): State {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true };
-  }
-
-  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Uncaught error:", error, errorInfo);
-  }
-
-  public render() {
-    if (this.state.hasError) {
-      return <Typography p={2}>Sorry.. there was an error</Typography>;
+  const errorMessage = useMemo(() => {
+    if (isRouteErrorResponse(error)) {
+      return `${error.status} ${error.statusText}`;
+    } else if (error instanceof Error) {
+      return error.message;
+    } else if (typeof error === "string") {
+      return error;
+    } else {
+      console.error(error);
+      return "Unknown error";
     }
+  }, [error]);
 
-    return this.props.children;
-  }
-}
+  return (
+    <Box p={2}>
+      <Typography variant="h4">Sorry.. there was an error</Typography>
+      <Typography color="error">{errorMessage}</Typography>
+      <Button
+        variant="contained"
+        onClick={() => navigate("/", { replace: true })}
+        sx={{ mt: 2 }}
+      >
+        Back
+      </Button>
+    </Box>
+  );
+};
 
 export default ErrorBoundary;
