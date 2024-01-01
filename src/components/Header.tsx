@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -22,7 +22,6 @@ type NavItem = {
 };
 
 const Header = () => {
-  const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -40,9 +39,11 @@ const Header = () => {
   const NavButton = ({ to, text, onClick }: NavItem) => (
     <NavLink
       to={to}
-      style={{
-        textDecoration: "none",
-        color: location.pathname === to ? "red" : "inherit",
+      style={({ isActive }) => {
+        return {
+          textDecoration: "none",
+          color: isActive ? "red" : grey[900],
+        };
       }}
     >
       <Button onClick={onClick} color="inherit">
