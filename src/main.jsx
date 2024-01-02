@@ -11,7 +11,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 
 const router = createBrowserRouter([
   {
-    path: "",
+    path: "/",
     element: <App />,
     errorElement: <ErrorBoundary />,
     children: [

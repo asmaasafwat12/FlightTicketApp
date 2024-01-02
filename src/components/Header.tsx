@@ -58,7 +58,7 @@ const Header = () => {
         <>
           <NavButton to="/" text="Flight List" onClick={handleItemClick} />
           <NavButton
-            to="/flight-form"
+            to="flight-form"
             text="Flight Form"
             onClick={handleItemClick}
           />
@@ -66,7 +66,7 @@ const Header = () => {
       )}
 
       <NavButton
-        to="/login"
+        to="login"
         text={isAuthenticated ? "LogOut" : "Login"}
         onClick={() => {
           if (isAuthenticated) dispatch(logout());
@@ -75,7 +75,7 @@ const Header = () => {
       />
 
       {!isAuthenticated && (
-        <NavButton to="/register" text="Register" onClick={handleItemClick} />
+        <NavButton to="register" text="Register" onClick={handleItemClick} />
       )}
     </>
   );

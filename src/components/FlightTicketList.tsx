@@ -69,7 +69,7 @@ const FlightTicketList = () => {
             <CardContent style={{ display: "flex", alignItems: "center" }}>
               <Button style={{ flex: 1 }}>
                 <Link
-                  to={`/flight-form/${ticket.id}`}
+                  to={`flight-form/${ticket.id}`}
                   style={{
                     textDecoration: "none",
                     color: "inherit",

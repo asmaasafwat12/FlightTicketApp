@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { TextField, Button, Grid } from "@mui/material";
@@ -49,29 +49,35 @@ const FlightTicketForm: React.FC<FlightTicketFormProps> = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
-  const flightTickets = useSelector((state: RootState) => state.flightTickets);
+  const { data: flightTicketsData } = useSelector(
+    (state: RootState) => state.flightTickets
+  );
   const navigate = useNavigate();
 
-  const preFillFormWithData = (values: FlightTicketData) => {
-    setValue("flightCode", values.flightCode);
-    setValue("date", values.date);
-    setValue("capacity", values.capacity);
+  const preFillFormWithData = ({
+    flightCode,
+    date,
+    capacity,
+  }: FlightTicketData) => {
+    setValue("flightCode", flightCode);
+    setValue("date", date);
+    setValue("capacity", capacity);
   };
 
   const getFieldLabel = (field: Fields): string => {
-    return field === "date"
-      ? "Date"
-      : field.charAt(0).toUpperCase() + field.slice(1);
+    return field.charAt(0).toUpperCase() + field.slice(1);
   };
 
   useEffect(() => {
     if (id) {
-      const ticket = flightTickets.data.find(
+      const ticket = flightTicketsData.find(
         (ticket) => ticket.id === Number(id)
       );
       ticket && preFillFormWithData(ticket);
+    } else {
+      reset();
     }
-  }, [id, flightTickets.data, setValue]);
+  }, [id, flightTicketsData, setValue, reset]);
 
   const handleOnSubmit = (values) => {
     const formattedDate = new Date(values.date).toISOString().split("T")[0];

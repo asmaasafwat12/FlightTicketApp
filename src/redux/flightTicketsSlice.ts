@@ -31,7 +31,6 @@ export const getFlightTickets = createAsyncThunk(
 export const addNewFlightTicket = createAsyncThunk(
   "flightTickets/addNewFlightTicket",
   async (newTicket: FlightTicket) => {
-    console.log(newTicket);
     const response = await axios.post(
       "http://localhost:3001/flightTickets",
       newTicket
